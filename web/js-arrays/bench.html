@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Performance Test</title>
+</head>
+<body>
+    <h1>1D vs 2D Array Performance Test</h1>
+    <p id="result"></p>
+
+    <script>
+        // Point class for the object-based approach
+        class Point {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        function test1DArray(points) {
+            let sum = 0;
+            for (let i = 0; i < points.length; i += 2) {
+                sum += points[i] + points[i + 1];
+            }
+            return sum;
+        }
+
+        function test2DArray(points) {
+            let sum = 0;
+            for (let i = 0; i < points.length; i++) {
+                sum += points[i][0] + points[i][1];
+            }
+            return sum;
+        }
+
+        function test1DObjectArray(points) {
+            let sum = 0;
+            for (let i = 0; i < points.length; i++) {
+                sum += points[i].x + points[i].y;
+            }
+            return sum;
+        }
+
+        function measurePerformance() {
+            const numPoints = 5000000;
+
+            const points1D = new Array(numPoints * 2);
+            const points2D = new Array(numPoints);
+            const pointsObject = new Array(numPoints);
+
+            // Fill arrays with random points
+            for (let i = 0; i < numPoints; i++) {
+                const x = Math.random();
+                const y = Math.random();
+                points1D[i * 2] = x;
+                points1D[i * 2 + 1] = y;
+                points2D[i] = [x, y];
+                pointsObject[i] = new Point(x, y);
+            }
+
+            // Measure performance of 1D array
+            const start1D = performance.now();
+            const sum1D = test1DArray(points1D);
+            const end1D = performance.now();
+            const time1D = end1D - start1D;
+
+            // Measure performance of 2D array
+            const start2D = performance.now();
+            const sum2D = test2DArray(points2D);
+            const end2D = performance.now();
+            const time2D = end2D - start2D;
+
+            // Measure performance of 1D array of Point objects
+            const startObject = performance.now();
+            const sumObject = test1DObjectArray(pointsObject);
+            const endObject = performance.now();
+            const timeObject = endObject - startObject;
+
+            document.getElementById("result").innerText = `
+                1D Array Time: ${time1D.toFixed(2)} ms (Sum: ${sum1D.toFixed(2)})
+                2D Array Time: ${time2D.toFixed(2)} ms (Sum: ${sum2D.toFixed(2)})
+                1D Object Array Time: ${timeObject.toFixed(2)} ms (Sum: ${sumObject.toFixed(2)})
+            `;
+        }
+
+        measurePerformance();
+    </script>
+</body>
+</html>
