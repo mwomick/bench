@@ -1,11 +1,19 @@
 # 2D vs 1D Arrays for Points
 
+Tests for accessing 5,000,000 points in memory using a 1D array, a 2D array, and a 1D object array.
+
+Last updated: Aug 9, 2024.
+
 ## Safari
-1D Array Time: 29.00 ms (Sum: 4999196.74)
-2D Array Time: 57.00 ms (Sum: 4999196.74)
-1D Object Array Time: 32.00 ms (Sum: 4999196.74)
+| Test            | Time     |
+|-----------------|----------|
+| 1D Array        | 29.00 ms |
+| 2D Array        | 57.00 ms |
+| 1D Object Array | 32.00 ms |
 
 ## Chrome
-1D Array Time: 26.00 ms (Sum: 5000302.92)
-2D Array Time: 53.10 ms (Sum: 5000302.92)
-1D Object Array Time: 46.40 ms (Sum: 5000302.92)
+| Test            | Time     |
+|-----------------|----------|
+| 1D Array        | 26.00 ms |
+| 2D Array        | 53.10 ms |
+| 1D Object Array | 46.40 ms |
